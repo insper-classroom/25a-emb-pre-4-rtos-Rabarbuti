@@ -19,12 +19,12 @@ SemaphoreHandle_t xSemaphore_g;
 
 void btn_callback_r(uint gpio, uint32_t events) {
     if (events == 0x4) { // fall edge
-        xSemaphoreGiveFromISR(xSemaphore_r, 0);
-    }
-}
-void btn_callback_g(uint gpio, uint32_t events) {
-    if (events == 0x4) { // fall edge
-        xSemaphoreGiveFromISR(xSemaphore_g, 0);
+        if (gpio == BTN_PIN_R) {
+            xSemaphoreGiveFromISR(xSemaphore_r, 0);
+
+        }if (gpio == BTN_PIN_G) {
+            xSemaphoreGiveFromISR(xSemaphore_g, 0);
+        }
     }
 }
 
